@@ -260,6 +260,11 @@ function updateProductList() {
                 updateTime = $(`<span class="updateTime">${new Date(product.productUpdatedAt).toLocaleDateString("ko-KR", { year: 'numeric', month: '2-digit', day: '2-digit' }).replaceAll(". ", ".").substring(0, 10)}</span>`);
             }
 
+            if (product.productSaleStatus  == "품절") {
+                stopBtn = $("");
+                updateTime = $(`<span class="updateTime">-</span>`);
+            }
+
             return $("<tr>")
                 .append($("<td>").html(`<input type="checkbox">`))
                 .append($("<td>").text(product.productId))
