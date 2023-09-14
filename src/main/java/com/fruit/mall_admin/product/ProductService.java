@@ -82,7 +82,7 @@ public class ProductService {
         return productRepository.countSoldOutProducts();
     }
 
-    @CacheEvict(cacheNames = {"totalProduct", "onSaleProduct", "offSaleProduct", "soldOutProduct"}, allEntries = true, beforeInvocation = true)
+    @CacheEvict(cacheNames = {"totalProduct", "onSaleProduct", "offSaleProduct", "soldOutProduct"}, allEntries = true, beforeInvocation = true, cacheManager = "cacheManager")
     public void updateProductStatus(Long productId, String status) {
         productRepository.updateProductStatus(productId, status);
     }
