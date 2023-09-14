@@ -151,6 +151,15 @@ $(document).on("click", ".stopSaleBtn", (e) => {
 });
 
 $(() => {
+    $(".product_Status").each((i, e) => {
+        const status = $(e).text();
+        if (status == "품절") {
+            const stopSaleBtn = $(e).closest('tr').find('.stopSaleBtn');
+            stopSaleBtn.remove();
+            $(e).closest('tr').find('.updateTime').show().text("-");
+        }
+    });
+
     $(".cnt").each((i, e) => {
         const cnt = $(e).text();
         if (cnt == "0"　||　cnt == "0%") {
