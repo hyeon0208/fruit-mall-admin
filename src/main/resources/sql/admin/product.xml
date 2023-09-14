@@ -55,27 +55,12 @@
         SELECT * FROM product WHERE PRODUCT_ID = #{productId};
     </select>
 
-    <select id="countTotalProducts" resultType="int">
-        SELECT COUNT(*)
-        FROM product;
-    </select>
-
-    <select id="countOnSaleProducts" parameterType="String" resultType="int">
-        SELECT COUNT(*)
-        FROM product
-        WHERE PRODUCT_SALE_STATUS = '판매중';
-    </select>
-
-    <select id="countOffSaleProducts" parameterType="String" resultType="int">
-        SELECT COUNT(*)
-        FROM product
-        WHERE PRODUCT_SALE_STATUS = '판매중지';
-    </select>
-
-    <select id="countSoldOutProducts" parameterType="String" resultType="int">
-        SELECT COUNT(*)
-        FROM product
-        WHERE PRODUCT_SALE_STATUS = '품절';
+    <select id="countOfProductsByStatus" resultType="com.fruit.mall_admin.product.dto.CountOfProductsResDto">
+        SELECT
+                (SELECT COUNT(*) FROM product) AS totalCount,
+                (SELECT COUNT(*) FROM product WHERE PRODUCT_SALE_STATUS = '판매중') AS onSaleCount,
+                (SELECT COUNT(*) FROM product WHERE PRODUCT_SALE_STATUS = '판매중지') AS offSaleCount,
+                (SELECT COUNT(*) FROM product WHERE PRODUCT_SALE_STATUS = '품절') AS soldOutCount;
     </select>
 
     <select id="selectAll" resultType="com.fruit.mall_admin.product.Product">

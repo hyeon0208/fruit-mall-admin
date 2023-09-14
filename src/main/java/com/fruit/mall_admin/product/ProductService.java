@@ -1,5 +1,6 @@
 package com.fruit.mall_admin.product;
 
+import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
 import com.fruit.mall_admin.product.dto.ProductAndImageInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -61,28 +62,12 @@ public class ProductService {
         return productRepository.selectProductAllById(id);
     }
 
-
-    @Cacheable(cacheNames = "totalProduct", key = "'admin'", cacheManager = "cacheManager")
-    public int countTotalProducts() {
-        return productRepository.countTotalProducts();
+    @Cacheable(cacheNames = "counts", key = "'admin'", cacheManager = "cacheManager")
+    public CountOfProductsResDto countOfProductsByStatus() {
+        return productRepository.countOfProductsByStatus();
     }
 
-    @Cacheable(cacheNames = "onSaleProduct", key = "'admin'", cacheManager = "cacheManager")
-    public int countOnSaleProducts() {
-        return productRepository.countOnSaleProducts();
-    }
-
-    @Cacheable(cacheNames = "offSaleProduct", key = "'admin'", cacheManager = "cacheManager")
-    public int countOffSaleProducts() {
-        return productRepository.countOffSaleProducts();
-    }
-
-    @Cacheable(cacheNames = "soldOutProduct", key = "'admin'", cacheManager = "cacheManager")
-    public int countSoldOutProducts() {
-        return productRepository.countSoldOutProducts();
-    }
-
-    @CacheEvict(cacheNames = {"totalProduct", "onSaleProduct", "offSaleProduct", "soldOutProduct"}, allEntries = true, beforeInvocation = true, cacheManager = "cacheManager")
+    @CacheEvict(cacheNames = "counts",  key = "'admin'", beforeInvocation = true, cacheManager = "cacheManager")
     public void updateProductStatus(Long productId, String status) {
         productRepository.updateProductStatus(productId, status);
     }

@@ -1,5 +1,6 @@
 package com.fruit.mall_admin.product;
 
+import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
 import com.fruit.mall_admin.product.dto.ProductAndImageInfo;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -27,13 +28,7 @@ public interface ProductMapper {
 
     List<Product> selectAllByFilter(@Param("status") String status, @Param("category") String category, @Param("searchCond") String searchCond);
 
-    int countTotalProducts();
-
-    int countOnSaleProducts();
-
-    int countOffSaleProducts();
-
-    int countSoldOutProducts();
+    CountOfProductsResDto countOfProductsByStatus();
 
     void updateProductStatus(@Param("productId") Long productId, @Param("status") String status);
 }

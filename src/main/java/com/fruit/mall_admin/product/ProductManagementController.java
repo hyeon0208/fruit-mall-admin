@@ -6,6 +6,7 @@ import com.fruit.mall_admin.firebase.UploadResult;
 import com.fruit.mall_admin.image.Image;
 import com.fruit.mall_admin.image.ImageService;
 import com.fruit.mall_admin.image.dto.FileInfo;
+import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
 import com.fruit.mall_admin.product.dto.PageResDto;
 import com.fruit.mall_admin.product.dto.ProductRegistrationForm;
 import com.fruit.mall_admin.product.dto.SaleStopDto;
@@ -37,16 +38,12 @@ public class ProductManagementController {
                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                          @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         PageInfo<Product> pageInfo = productService.getProducts(pageNum, pageSize);
+        CountOfProductsResDto dto = productService.countOfProductsByStatus();
 
-        int totalCount = productService.countTotalProducts();
-        int onSaleCount = productService.countOnSaleProducts();
-        int offSaleCount = productService.countOffSaleProducts();
-        int soldOutCount = productService.countSoldOutProducts();
-
-        model.addAttribute("totalCount", totalCount);
-        model.addAttribute("onSaleCount", onSaleCount);
-        model.addAttribute("offSaleCount", offSaleCount);
-        model.addAttribute("soldOutCount", soldOutCount);
+        model.addAttribute("totalCount", dto.getTotalCount());
+        model.addAttribute("onSaleCount", dto.getOnSaleCount());
+        model.addAttribute("offSaleCount", dto.getOffSaleCount());
+        model.addAttribute("soldOutCount", dto.getSoldOutCount());
         model.addAttribute("pageInfo", pageInfo);
         return "admin/product";
     }

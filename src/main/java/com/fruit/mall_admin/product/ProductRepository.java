@@ -1,5 +1,6 @@
 package com.fruit.mall_admin.product;
 
+import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
 import com.fruit.mall_admin.product.dto.ProductAndImageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -57,23 +58,8 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
-    public int countTotalProducts() {
-        return productMapper.countTotalProducts();
-    }
-
-    @Override
-    public int countOnSaleProducts() {
-        return productMapper.countOnSaleProducts();
-    }
-
-    @Override
-    public int countOffSaleProducts() {
-        return productMapper.countOffSaleProducts();
-    }
-
-    @Override
-    public int countSoldOutProducts() {
-        return productMapper.countSoldOutProducts();
+    public CountOfProductsResDto countOfProductsByStatus() {
+        return productMapper.countOfProductsByStatus();
     }
 
     @Override
