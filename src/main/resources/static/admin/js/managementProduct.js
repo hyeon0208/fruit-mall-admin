@@ -151,6 +151,13 @@ $(document).on("click", ".stopSaleBtn", (e) => {
 });
 
 $(() => {
+    $(".cnt").each((i, e) => {
+        const cnt = $(e).text();
+        if (cnt == "0"　||　cnt == "0%") {
+            $(e).text("-");
+        }
+    });
+
     // 상품 가격 천자리 구분 기호 표시
     $(".productPrice").each((i, e) => {
         const price = $(e).text();
@@ -252,9 +259,9 @@ function updateProductList() {
                 .append($("<td>").text(product.productName))
                 .append($("<td>").text((product.productPrice * (1 - (product.productDiscount / 100))).toLocaleString("ko-KR", { maximumFractionDigits: 0 }) + "원"))
                 .append($("<td>").text(product.productDiscount > 0 ? `${product.productDiscount}%` : "-"))
-                .append($("<td>").attr("name", "찜수").text("-"))
-                .append($("<td>").attr("name", "결제횟수").text("-"))
-                .append($("<td>").attr("name", "리뷰수").text("-"))
+                .append($("<td>").text(product.likeCount > 0 ? product.likeCount : "-"))
+                .append($("<td>").text(product.paymentCount > 0 ? product.paymentCount : "-"))
+                .append($("<td>").text(product.reviewCount > 0 ? product.reviewCount : "-"))
                 .append($("<td>").text(new Date(product.productCreatedAt).toLocaleDateString("ko-KR", { year: 'numeric', month: '2-digit', day: '2-digit' }).replaceAll(". ", ".").substring(0, 10)))
                 .append($("<td>").html(`<button class="editBtn" value="${product.productId}">수정</button>`))
                 .append($("<td>").append(stopBtn).append(updateTime));

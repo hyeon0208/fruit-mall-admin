@@ -6,10 +6,7 @@ import com.fruit.mall_admin.firebase.UploadResult;
 import com.fruit.mall_admin.image.Image;
 import com.fruit.mall_admin.image.ImageService;
 import com.fruit.mall_admin.image.dto.FileInfo;
-import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
-import com.fruit.mall_admin.product.dto.PageResDto;
-import com.fruit.mall_admin.product.dto.ProductRegistrationForm;
-import com.fruit.mall_admin.product.dto.SaleStopDto;
+import com.fruit.mall_admin.product.dto.*;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
@@ -37,7 +34,7 @@ public class ProductManagementController {
     public String paging(Model model,
                          @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                          @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
-        PageInfo<Product> pageInfo = productService.getProducts(pageNum, pageSize);
+        PageInfo<ProductResDto> pageInfo = productService.getProducts(pageNum, pageSize);
         CountOfProductsResDto dto = productService.countOfProductsByStatus();
 
         model.addAttribute("totalCount", dto.getTotalCount());
@@ -57,8 +54,7 @@ public class ProductManagementController {
         String status = params.get("status");
         String category = params.get("category");
         String searchCond = params.get("searchCond");
-        PageInfo<Product> pageInfo = productService.getProductsByFilter(pageNum, pageSize, status, category, searchCond);
-
+        PageInfo<ProductResDto> pageInfo = productService.getProductsByFilter(pageNum, pageSize, status, category, searchCond);
         PageResDto pageResDto = new PageResDto(pageInfo, status, category);
 
         return pageResDto;

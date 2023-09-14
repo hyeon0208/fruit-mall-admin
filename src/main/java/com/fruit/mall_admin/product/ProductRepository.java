@@ -1,7 +1,7 @@
 package com.fruit.mall_admin.product;
 
 import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
-import com.fruit.mall_admin.product.dto.ProductAndImageInfo;
+import com.fruit.mall_admin.product.dto.ProductResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -43,18 +43,13 @@ public class ProductRepository implements ProductMapper {
     }
 
     @Override
-    public List<Product> selectAll() {
+    public List<ProductResDto> selectAll() {
         return productMapper.selectAll();
     }
 
     @Override
-    public List<Product> selectAllByFilter(String status, String category, String searchCond) {
+    public List<ProductResDto> selectAllByFilter(String status, String category, String searchCond) {
         return productMapper.selectAllByFilter(status, category, searchCond);
-    }
-
-    @Override
-    public List<ProductAndImageInfo> selectProductAndImageByFilter(String category, String searchCond, Long id) {
-        return productMapper.selectProductAndImageByFilter(category, searchCond, id);
     }
 
     @Override

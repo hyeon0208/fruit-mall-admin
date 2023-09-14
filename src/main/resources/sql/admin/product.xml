@@ -63,12 +63,40 @@
                 (SELECT COUNT(*) FROM product WHERE PRODUCT_SALE_STATUS = '품절') AS soldOutCount;
     </select>
 
-    <select id="selectAll" resultType="com.fruit.mall_admin.product.Product">
-        SELECT * FROM product;
+    <select id="selectAll" resultType="com.fruit.mall_admin.product.dto.ProductResDto">
+        SELECT p.PRODUCT_ID,
+               p.CATEGORY_ID,
+               p.PRODUCT_NAME,
+               p.PRODUCT_PRICE,
+               p.PRODUCT_STOCK,
+               p.PRODUCT_DISCOUNT,
+               p.PRODUCT_SALE_STATUS,
+               p.PRODUCT_CREATED_AT,
+               COALESCE(l.LIKE_COUNT, 0) AS LIKE_COUNT,
+               COALESCE(op.PAYMENT_COUNT, 0) AS PAYMENT_COUNT,
+               COALESCE(r.REVIEW_COUNT, 0) AS REVIEW_COUNT
+        FROM product AS p
+                 LEFT JOIN (SELECT PRODUCT_ID, COUNT(*) AS LIKE_COUNT FROM likes GROUP BY PRODUCT_ID) l ON l.PRODUCT_ID = p.PRODUCT_ID
+                 LEFT JOIN (SELECT PRODUCT_ID, COUNT(*) AS PAYMENT_COUNT FROM order_product GROUP BY PRODUCT_ID) op ON op.PRODUCT_ID = p.PRODUCT_ID
+                 LEFT JOIN (SELECT PRODUCT_ID, COUNT(*) AS REVIEW_COUNT FROM review GROUP BY PRODUCT_ID) r ON r.PRODUCT_ID = p.PRODUCT_ID;
     </select>
 
-    <select id="selectAllByFilter" resultType="com.fruit.mall_admin.product.Product">
-        SELECT * FROM product
+    <select id="selectAllByFilter" resultType="com.fruit.mall_admin.product.dto.ProductResDto">
+        SELECT  p.PRODUCT_ID,
+                p.CATEGORY_ID,
+                p.PRODUCT_NAME,
+                p.PRODUCT_PRICE,
+                p.PRODUCT_STOCK,
+                p.PRODUCT_DISCOUNT,
+                p.PRODUCT_SALE_STATUS,
+                p.PRODUCT_CREATED_AT,
+                COALESCE(l.LIKE_COUNT, 0) AS LIKE_COUNT,
+                COALESCE(op.PAYMENT_COUNT, 0) AS PAYMENT_COUNT,
+                COALESCE(r.REVIEW_COUNT, 0) AS REVIEW_COUNT
+        FROM product AS p
+                LEFT JOIN (SELECT PRODUCT_ID, COUNT(*) AS LIKE_COUNT FROM likes GROUP BY PRODUCT_ID) l ON l.PRODUCT_ID = p.PRODUCT_ID
+                LEFT JOIN (SELECT PRODUCT_ID, COUNT(*) AS PAYMENT_COUNT FROM order_product GROUP BY PRODUCT_ID) op ON op.PRODUCT_ID = p.PRODUCT_ID
+                LEFT JOIN (SELECT PRODUCT_ID, COUNT(*) AS REVIEW_COUNT FROM review GROUP BY PRODUCT_ID) r ON r.PRODUCT_ID = p.PRODUCT_ID
         <where>
             <if test="status != '전체상태' and status != null and status != ''">
                 AND PRODUCT_SALE_STATUS = #{status}

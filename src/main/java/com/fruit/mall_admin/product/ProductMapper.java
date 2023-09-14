@@ -1,7 +1,7 @@
 package com.fruit.mall_admin.product;
 
 import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
-import com.fruit.mall_admin.product.dto.ProductAndImageInfo;
+import com.fruit.mall_admin.product.dto.ProductResDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
 
@@ -22,11 +22,9 @@ public interface ProductMapper {
 
     Product selectProductAllById(@Param("productId") Long id);
 
-    List<ProductAndImageInfo> selectProductAndImageByFilter(@Param("category") String category, @Param("searchCond") String searchCond, @Param("userIdNo") Long userIdNo);
+    List<ProductResDto> selectAll();
 
-    List<Product> selectAll();
-
-    List<Product> selectAllByFilter(@Param("status") String status, @Param("category") String category, @Param("searchCond") String searchCond);
+    List<ProductResDto> selectAllByFilter(@Param("status") String status, @Param("category") String category, @Param("searchCond") String searchCond);
 
     CountOfProductsResDto countOfProductsByStatus();
 
