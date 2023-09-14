@@ -4,6 +4,8 @@ import com.fruit.mall_admin.product.dto.ProductAndImageInfo;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
+import org.springframework.cache.annotation.CacheEvict;
+import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -34,7 +36,6 @@ public class ProductService {
         return new PageInfo<>(productAndImageInfos);
     }
 
-
     public String getUpdatedDescription(String description, String editorFirebaseImageUrl, String blobUrl) {
         String patternString = "<img([^>]*)src=[\"']" + Pattern.quote(blobUrl) + "[\"']([^>]*)>";
         Pattern pattern = Pattern.compile(patternString);
@@ -42,10 +43,7 @@ public class ProductService {
         return updatedDiscription;
     }
 
-    public int selectProductStock(Long id) {
-        return productRepository.selectProductStock(id);
-    }
-
+    @CacheEvict(cacheNames = {"totalProduct", "onSaleProduct", "offSaleProduct", "soldOutProduct"}, allEntries = true, beforeInvocation = true)
     public void insertProduct(Product product) {
         productRepository.insertProduct(product);
     }
@@ -54,6 +52,7 @@ public class ProductService {
         productRepository.updateProduct(product);
     }
 
+    @CacheEvict(cacheNames = {"totalProduct", "onSaleProduct", "offSaleProduct", "soldOutProduct"}, allEntries = true, beforeInvocation = true)
     public void deleteProductById(Long id) {
         productRepository.deleteProductById(id);
     }
@@ -63,22 +62,27 @@ public class ProductService {
     }
 
 
+    @Cacheable(cacheNames = "totalProduct", key = "'admin'", cacheManager = "cacheManager")
     public int countTotalProducts() {
         return productRepository.countTotalProducts();
     }
 
+    @Cacheable(cacheNames = "onSaleProduct", key = "'admin'", cacheManager = "cacheManager")
     public int countOnSaleProducts() {
         return productRepository.countOnSaleProducts();
     }
 
+    @Cacheable(cacheNames = "offSaleProduct", key = "'admin'", cacheManager = "cacheManager")
     public int countOffSaleProducts() {
         return productRepository.countOffSaleProducts();
     }
 
+    @Cacheable(cacheNames = "soldOutProduct", key = "'admin'", cacheManager = "cacheManager")
     public int countSoldOutProducts() {
         return productRepository.countSoldOutProducts();
     }
 
+    @CacheEvict(cacheNames = {"totalProduct", "onSaleProduct", "offSaleProduct", "soldOutProduct"}, allEntries = true, beforeInvocation = true)
     public void updateProductStatus(Long productId, String status) {
         productRepository.updateProductStatus(productId, status);
     }
