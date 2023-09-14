@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.fruit.mall_admin.product.ProductMapper">
+    <insert id="insertProduct" parameterType="com.fruit.mall_admin.product.Product" useGeneratedKeys="true" keyProperty="productId">
+        INSERT INTO product (
+                             CATEGORY_ID,
+                             PRODUCT_NAME,
+                             PRODUCT_PRICE,
+                             PRODUCT_STOCK,
+                             PRODUCT_DESCRIPTION,
+                             PRODUCT_DISCOUNT,
+                             PRODUCT_SALE_STATUS
+                             )
+                    VALUES (
+                            #{categoryId},
+                            #{productName},
+                            #{productPrice},
+                            #{productStock},
+                            #{productDescription},
+                            #{productDiscount},
+                            #{productSaleStatus}
+                            )
+    </insert>
+
+    <update id="updateProduct" parameterType="com.fruit.mall_admin.product.Product">
+        UPDATE product
+        SET
+            CATEGORY_ID = #{categoryId},
+            PRODUCT_NAME = #{productName},
+            PRODUCT_PRICE = #{productPrice},
+            PRODUCT_STOCK = #{productStock},
+            PRODUCT_DESCRIPTION = #{productDescription},
+            PRODUCT_DISCOUNT = #{productDiscount},
+            PRODUCT_SALE_STATUS = #{productSaleStatus}
+        WHERE
+            PRODUCT_ID = #{productId}
+    </update>
+
+    <update id="updateProductStock" parameterType="com.fruit.mall_admin.product.Product">
+        UPDATE product
+        SET
+            PRODUCT_STOCK = GREATEST(0, PRODUCT_STOCK - #{orderCount}),
+            PRODUCT_SALE_STATUS = IF(GREATEST(0, PRODUCT_STOCK - #{orderCount}) = 0, '품절', PRODUCT_SALE_STATUS)
+        WHERE
+            PRODUCT_ID = #{productId}
+    </update>
+
+    <select id="selectProductStock" resultType="int">
+        SELECT PRODUCT_STOCK FROM product WHERE PRODUCT_ID = #{productId};
+    </select>
+
+    <select id="selectProductAllById" parameterType="Long" resultType="com.fruit.mall_admin.product.Product">
+        SELECT * FROM product WHERE PRODUCT_ID = #{productId};
+    </select>
+
+    <select id="countTotalProducts" resultType="int">
+        SELECT COUNT(*)
+        FROM product;
+    </select>
+
+    <select id="countOnSaleProducts" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE PRODUCT_SALE_STATUS = '판매중';
+    </select>
+
+    <select id="countOffSaleProducts" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE PRODUCT_SALE_STATUS = '판매중지';
+    </select>
+
+    <select id="countSoldOutProducts" parameterType="String" resultType="int">
+        SELECT COUNT(*)
+        FROM product
+        WHERE PRODUCT_SALE_STATUS = '품절';
+    </select>
+
+    <select id="selectAll" resultType="com.fruit.mall_admin.product.Product">
+        SELECT * FROM product;
+    </select>
+
+    <select id="selectAllByFilter" resultType="com.fruit.mall_admin.product.Product">
+        SELECT * FROM product
+        <where>
+            <if test="status != '전체상태' and status != null and status != ''">
+                AND PRODUCT_SALE_STATUS = #{status}
+            </if>
+
+            <if test="category != '전체카테고리' and category != null and category != ''">
+                AND CATEGORY_ID = (SELECT CATEGORY_ID FROM category WHERE CATEGORY_NAME = #{category})
+            </if>
+
+            <if test="searchCond != null and searchCond !=''">
+                AND PRODUCT_NAME LIKE CONCAT('%', #{searchCond}, '%')
+            </if>
+        </where>
+    </select>
+
+    <update id="updateProductStatus" >
+        UPDATE product
+        SET PRODUCT_SALE_STATUS = #{status}
+        WHERE PRODUCT_ID = #{productId};
+    </update>
+
+    <delete id="deleteProductById">
+        DELETE FROM product WHERE PRODUCT_ID = #{productId};
+    </delete>
+</mapper>
