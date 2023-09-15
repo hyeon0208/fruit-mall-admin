@@ -3,7 +3,6 @@ package com.fruit.mall_admin.product;
 import com.fruit.mall_admin.product.dto.ProductDetail;
 import com.fruit.mall_admin.review.ReviewService;
 import com.fruit.mall_admin.review.dto.DetailReviewDto;
-import com.fruit.mall_admin.review.dto.ReviewResDto;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Controller;
