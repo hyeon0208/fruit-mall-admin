@@ -14,4 +14,11 @@
                  JOIN product p ON r.PRODUCT_ID = p.PRODUCT_ID
                  JOIN user u ON r.USER_ID_NO = u.USER_ID_NO
     </select>
+
+    <select id="countReviews" resultType="com.fruit.mall_admin.review.dto.ReviewCountDto">
+        SELECT
+            (SELECT COUNT(*) FROM review) AS totalReviewCount,
+            (SELECT COUNT(*) FROM review  WHERE REVIEW_STATUS = '답변완료') AS completedRepliedCount,
+            (SELECT COUNT(*) FROM review WHERE REVIEW_STATUS = '미답변') AS notRepliedCount;
+    </select>
 </mapper>

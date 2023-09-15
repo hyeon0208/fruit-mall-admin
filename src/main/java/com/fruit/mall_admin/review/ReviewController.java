@@ -1,5 +1,6 @@
 package com.fruit.mall_admin.review;
 
+import com.fruit.mall_admin.review.dto.ReviewCountDto;
 import com.fruit.mall_admin.review.dto.ReviewResDto;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -20,8 +21,11 @@ public class ReviewController {
                                @RequestParam(value = "pageNum", defaultValue = "1") Integer pageNum,
                                @RequestParam(value = "pageSize", defaultValue = "5") Integer pageSize) {
         PageInfo<ReviewResDto> pageInfo = reviewService.getReviews(pageNum, pageSize);
-        System.out.println("pageInfo = " + pageInfo.getList());
+        ReviewCountDto countDto = reviewService.countReviews();
         model.addAttribute("pageInfo", pageInfo);
+        model.addAttribute("totalCount", countDto.getTotalReviewCount());
+        model.addAttribute("repliedCount", countDto.getCompletedRepliedCount());
+        model.addAttribute("notRepliedCount", countDto.getNotRepliedCount());
         return "admin/review";
     }
 }

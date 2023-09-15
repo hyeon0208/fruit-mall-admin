@@ -11,13 +11,13 @@
             <div class="box01">
                 <ul>
                     <li>
-                        전체리뷰 <span>100</span>건
+                        전체리뷰 <span th:text="${totalCount}"></span>건
                     </li>
                     <li>
-                        답변완료 <span>60</span>건
+                        답변완료 <span th:text="${repliedCount}"></span>건
                     </li>
                     <li>
-                        미답변 <span>40</span>건
+                        미답변 <span th:text="${notRepliedCount}"></span>건
                     </li>
                 </ul>
             </div>
