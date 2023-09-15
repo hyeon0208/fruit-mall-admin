@@ -1,6 +1,7 @@
 package com.fruit.mall_admin.product;
 
 import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
+import com.fruit.mall_admin.product.dto.ProductDetail;
 import com.fruit.mall_admin.product.dto.ProductResDto;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
@@ -36,6 +37,10 @@ public class ProductService {
         Pattern pattern = Pattern.compile(patternString);
         String updatedDiscription = pattern.matcher(description).replaceAll(String.format("<img src=\"%s\"$1$2", editorFirebaseImageUrl));
         return updatedDiscription;
+    }
+
+    public ProductDetail selectProductDetailByProductId(Long id) {
+        return productRepository.selectProductDetailByProductId(id);
     }
 
     @CacheEvict(cacheNames = "counts",  key = "'admin'", beforeInvocation = true, cacheManager = "cacheManager")

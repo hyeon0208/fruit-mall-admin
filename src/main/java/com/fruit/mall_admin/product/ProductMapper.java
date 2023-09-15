@@ -1,6 +1,7 @@
 package com.fruit.mall_admin.product;
 
 import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
+import com.fruit.mall_admin.product.dto.ProductDetail;
 import com.fruit.mall_admin.product.dto.ProductResDto;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Param;
@@ -19,6 +20,8 @@ public interface ProductMapper {
     int selectProductStock(@Param("productId") Long id);
 
     void deleteProductById(@Param("productId") Long id);
+
+    ProductDetail selectProductDetailByProductId(@Param("productId") Long id);
 
     Product selectProductAllById(@Param("productId") Long id);
 

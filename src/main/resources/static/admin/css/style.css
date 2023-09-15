@@ -2964,4 +2964,262 @@ header .inner .main-menu .item:hover .item__name {
   left: 1em;
 }
 
+
+#detail {
+  margin-top: 120px;
+}
+#detail .detail__inner {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 100px;
+  padding: 80px 0px;
+}
+#detail .detail__inner .box01 {
+  display: flex;
+  justify-content: space-between;
+  gap: 50px;
+  width: 100%;
+}
+#detail .detail__inner .box01 .left {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 50%;
+}
+#detail .detail__inner .box01 .left img {
+  width: 500px;
+  height: 500px;
+  border-radius: 20px;
+}
+#detail .detail__inner .box01 .right {
+  width: 50%;
+  display: flex;
+  flex-direction: column;
+}
+#detail .detail__inner .box01 .right .right__txt01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#detail .detail__inner .box01 .right .right__txt01 h2 {
+  font: 800 25px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt01 .red__heart,
+#review .detail__inner .box01 .right .right__txt01 .red__heart {
+  color: #00000069;
+}
+
+#detail .detail__inner .box01 .right .right__txt01 .red__heart.filled,
+#review .detail__inner .box01 .right .right__txt01 .red__heart.filled {
+  color: red;
+}
+
+#detail .detail__inner .box01 .right .right__txt02 {
+  margin-top: 50px;
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__01 span {
+  color: var(--primary-color);
+  font: 800 20px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__01 p span {
+  color: #333;
+  font: 800 20px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__01 p span:first-child {
+  text-decoration: line-through;
+  font: 600 14px/1 "Nanum Gothic";
+  margin-right: 10px;
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__02 {
+  margin-top: 20px;
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__02 p {
+  color: #333;
+  font: 600 16px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt02 .right__txt02__02 p .free {
+  color: #bbb;
+  font: 400 13px/1 "Nanum Gothic";
+  margin-left: 3px;
+}
+#detail .detail__inner .box01 .right .right__txt03 {
+  margin-top: 50px;
+  margin-bottom: 20px;
+  background-color: #f0f0f0;
+  height: 170px;
+  border-radius: 15px;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart {
+  position: relative;
+  top: 0px;
+  right: -450px;
+  width: 87px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner {
+  width: 100px;
+  display: flex;
+  align-items: center;
+  gap: 0px;
+  background-color: transparent;
+  border-radius: 5px;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner button {
+  width: 25px;
+  height: 25px;
+  border: 1px solid #333;
+  color: #333;
+  font: bold 14px/1 "Nanum Gothic";
+  text-align: center;
+  cursor: pointer;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner button:first-child {
+  background-color: transparent;
+  border-top-left-radius: 3px;
+  border-bottom-left-radius: 3px;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner button:last-child {
+  background-color: transparent;
+  border-top-right-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart .inner input {
+  width: 35px;
+  height: 25px;
+  border: none;
+  text-align: center;
+  font: 800 14px/1 "Nanum Gothic";
+  color: #252525;
+  background-color: transparent;
+  border: 1px solid #333;
+}
+#detail .detail__inner .box01 .right .right__txt03 .cart span {
+  font: 400 12px/1 "Nanum Gothic";
+  margin-top: 7px;
+}
+#detail .detail__inner .box01 .right .right__txt03 .right__txt03__01 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: var(--primary-color);
+  font: 600 18px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt03 .right__txt03__01 span:nth-of-type(2) {
+  font: 800 25px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__txt03 .right__txt03__02 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 20px;
+  color: #333;
+  font: 600 16px/1 "Nanum Gothic";
+}
+#detail .detail__inner .box01 .right .right__buttons {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 20px;
+}
+#detail .detail__inner .box01 .right .right__buttons button {
+  border: none;
+  cursor: pointer;
+  height: 70px;
+  width: 580px;
+  padding: 20px;
+  font: 600 20px/1 "Nanum Gothic";
+  letter-spacing: 1px;
+  border-radius: 10px;
+}
+#detail .detail__inner .box01 .right .right__buttons button:last-child {
+  background-color: var(--primary-color);
+  color: #fff;
+  margin-top: 10px;
+  transition: all 0.3s;
+}
+#detail .detail__inner .box01 .right .right__buttons button:last-child:hover {
+  background-color: #fff;
+  color: var(--primary-color);
+  border: 1px solid var(--primary-color);
+}
+#detail .detail__inner .box01 .right .right__modal .inner h4 {
+  width: 500px;
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 15px 200px;
+}
+#detail .detail__inner .box01 .right .right__modal .inner h5 .buttons {
+  display: flex;
+  align-items: center;
+}
+#detail .detail__inner .box01 .right .right__modal .inner h5 .buttons a {
+  width: 180px;
+  height: 45px;
+  text-align: center;
+  display: flex;
+  flex-direction: column;
+}
+#detail .detail__inner .box01 .right .right__modal .inner h5 .buttons a button {
+  border: none;
+  width: 100%;
+  height: 100%;
+  background-color: var(--primary-color);
+  color: #fff;
+  font: 500 16px/2 "Nanum Gothic";
+  cursor: pointer;
+}
+#detail .detail__inner .box02 {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
+  height: 50px;
+}
+#detail .detail__inner .box02 a {
+  margin-right: 3px;
+  width: 100%;
+  height: 100%;
+}
+#detail .detail__inner .box02 a .detailed__info,
+#detail .detail__inner .box02 a .review,
+#detail .detail__inner .box02 a .question {
+  text-align: center;
+  font: 700 18px/50px "Nanum Gothic";
+  color: #fff;
+  letter-spacing: 1px;
+}
+#detail .detail__inner .box02 a .detailed__info {
+  background-color: #252525;
+}
+#detail .detail__inner .box02 a .review,
+#detail .detail__inner .box02 a .question {
+  background-color: #f0f0f0;
+  color: #6c6c6c;
+}
+#detail .detail__inner .box02 a .question {
+  margin-right: 0px;
+}
+
+#detail .detail__inner .box03 div {
+  text-align: center;
+}
+
+#detail .detail__inner .box03 img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
 /*# sourceMappingURL=style.css.map */

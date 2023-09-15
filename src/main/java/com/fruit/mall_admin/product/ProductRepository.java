@@ -1,6 +1,7 @@
 package com.fruit.mall_admin.product;
 
 import com.fruit.mall_admin.product.dto.CountOfProductsResDto;
+import com.fruit.mall_admin.product.dto.ProductDetail;
 import com.fruit.mall_admin.product.dto.ProductResDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
@@ -30,6 +31,11 @@ public class ProductRepository implements ProductMapper {
     @Override
     public int selectProductStock(Long id) {
         return productMapper.selectProductStock(id);
+    }
+
+    @Override
+    public ProductDetail selectProductDetailByProductId(Long id) {
+        return productMapper.selectProductDetailByProductId(id);
     }
 
     @Override
