@@ -1,4 +1,5 @@
 $(() => {
+    // 답글 작성 모달창 작성 글자 수 표시
     $("#replyContent").on("input", () => {
         const inputLength = $("#replyContent").val().length;
         $("#content__count").text(inputLength + " / 500");
@@ -16,6 +17,7 @@ $(() => {
     });
 });
 
+// 답변 달기 클릭
 $(document).on("click", ".add_reply", (e) =>  {
     const target = $(e.currentTarget);
     const orderNumber = target.closest("tr").data("order-number");
@@ -48,12 +50,11 @@ $(document).on("click", ".add_reply", (e) =>  {
     });
 
     $(".admin__review button:eq(1)").on("click", () => {
-        // axios 요청
         axios({
             url: "/api/v1/reply",
             method: "post",
             data: {
-                reviewContents: $("#modal-contents").val(),
+                reviewContents: $("#replyContent").val(),
                 reviewId: reviewId
             },
             dataType: "json",
