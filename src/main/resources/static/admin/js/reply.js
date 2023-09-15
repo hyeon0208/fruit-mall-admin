@@ -53,7 +53,7 @@ $(document).on("click", ".add_reply", (e) =>  {
             url: "/api/v1/reply",
             method: "post",
             data: {
-                reviewContents: reviewContents,
+                reviewContents: $("#modal-contents").val(),
                 reviewId: reviewId
             },
             dataType: "json",
