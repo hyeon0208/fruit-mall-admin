@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/adminLayout}">
+<th:block layout:fragment="adminContent">
+
+  <section id="detail_review">
+    <div class="inner detail__inner">
+      <div class="box01">
+        <div class="left">
+          <img th:src="${productDetail.imageUrl}">
+        </div>
+
+        <div class="right">
+          <div class="right__txt01">
+            <h2 th:text="${productDetail.productName}"></h2>
+            <button class="material-icons red__heart" disabled>favorite</button>
+          </div>
+
+          <div class="right__txt02">
+            <div class="right__txt02__01">
+              <span id="detailDiscount" th:if="${productDetail.productDiscount > 0}" th:data-detail-discount="${productDetail.productDiscount}" th:text="|${productDetail.productDiscount}%|"></span>
+              <span th:if="${productDetail.productDiscount == 0}" text="-"></span>
+
+              <p th:if="${productDetail.productDiscount > 0}">
+                <span th:text="|${productDetail.productPrice}원|">상품가격</span>
+                <span id="DiscountAppliedPrice" th:text="|${#numbers.formatInteger((productDetail.productPrice * (1 - (productDetail.productDiscount / 100.0))), 3, 'COMMA')}원|">할인 적용 가격</span>
+              </p>
+
+              <p th:if="${productDetail.productDiscount == 0}">
+                <span text="-" hidden="hidden">상품가격</span>
+                <span id="NotDiscountAppliedPrice" th:text="|${#numbers.formatInteger((productDetail.productPrice), 3, 'COMMA')}원|">할인 적용 가격</span>
+              </p>
+            </div>
+
+            <div class="right__txt02__02">
+              <p>배송비 3,000원
+                <span class="free">(50,000원이상 결제시 무료배송)</span>
+              </p>
+            </div>
+          </div>
+
+          <div class="right__txt03">
+            <!-- 장바구니 클릭 시 수량 증감버튼 -->
+            <div class="cart">
+              <div class="inner">
+                <button style="display: none;">-</button>
+                <input id="detailProductCnt" type="text" value="1">
+                <button>+</button>
+              </div>
+              <span id="productStock" th:text="|남은수량 ${productDetail.productStock}개|">재고</span>
+            </div>
+
+            <div class="right__txt03__01">
+              <span>총 상품 금액</span>
+              <span id="detailTotalPrice" th:text="|${#numbers.formatInteger((productDetail.productPrice), 3, 'COMMA')}원|"></span>
+            </div>
+
+            <div class="right__txt03__02">
+              <span>배송비</span>
+              <span id="detailDeliveryFee"></span>
+            </div>
+          </div>
+          <div class="right__buttons">
+            <button>장바구니</button>
+            <button>구매하기</button>
+          </div>
+        </div>
+      </div>
+
+      <div class="box02">
+        <a th:href="@{/detail/{productId}(productId=${productId})}">
+          <div class="detailed__info">
+            <p>상세정보</p>
+          </div>
+        </a>
+
+        <a href="#">
+          <div class="review">
+            <p>상품리뷰</p>
+          </div>
+        </a>
+      </div>
+
+      <div class="box03">
+        <ul>
+          <li th:each="review : ${pageInfo.list}">
+            <span class="id" th:text="${review.userName}"></span>
+            <span class="date" th:text="${#dates.format(review.reviewCreatedAt,'yyyy.MM.dd')}"></span>
+
+            <p id="review_contents" th:utext="${review.reviewContents}"></p>
+            <div class="review-button-group">
+              <button>답글보기</button>
+            </div>
+          </li>
+        </ul>
+
+        <div class="pagination">
+          <a th:if="${pageInfo.hasPreviousPage}"
+             th:href="@{'/detail/review/' + ${productId} + '?pageNum=' + ${pageInfo.prePage} + '&pageSize=' + ${pageInfo.pageSize}}" class="prev">
+            <span class="material-symbols-outlined">chevron_left</span>
+          </a>
+
+          <p class="numbers">
+            <th:block th:each="i : ${pageInfo.navigatepageNums}">
+              <a th:href="@{'/detail/review/' + ${productId} + '?pageNum=' + ${i}+ '&pageSize=' + ${pageInfo.pageSize}}"
+                 th:text="${i}" th:style="${i == pageInfo.pageNum} ? 'font-weight: bold; font-size: 16px;' : ''"></a>
+            </th:block>
+          </p>
+
+          <a th:if="${pageInfo.hasNextPage}"
+             th:href="@{'/detail/review/' + ${productId}+ '?pageNum=' +${pageInfo.nextPage}+'&pageSize='+${pageInfo.pageSize}}" class="next">
+            <span class="material-symbols-outlined">chevron_right</span>
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+</th:block>
+</html>

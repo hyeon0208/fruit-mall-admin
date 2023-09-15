@@ -19,6 +19,16 @@
 
     </select>
 
+    <select id="selectAllByProductId" resultType="com.fruit.mall_admin.review.dto.DetailReviewDto">
+        SELECT r.REVIEW_ID,
+               u.USER_NAME,
+               r.REVIEW_CONTENTS,
+               r.REVIEW_CREATED_AT
+        FROM review r
+                 JOIN user u ON r.USER_ID_NO = u.USER_ID_NO
+        WHERE PRODUCT_ID = #{productId}
+    </select>
+
     <select id="countReviews" resultType="com.fruit.mall_admin.review.dto.ReviewCountDto">
         SELECT
             (SELECT COUNT(*) FROM review) AS totalReviewCount,
