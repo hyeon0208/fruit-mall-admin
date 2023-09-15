@@ -5,7 +5,7 @@ $(document).ready(function () {
         axios({
             method: "post",
             url: "/admin/login",
-            data: { id: $("#id").val(), password: $("#pw").val() },
+            data: { adminId: $("#id").val(), password: $("#pw").val() },
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
         }).then(res => {

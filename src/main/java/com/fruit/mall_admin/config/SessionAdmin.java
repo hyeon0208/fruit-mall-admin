@@ -10,6 +10,6 @@ public class SessionAdmin implements Serializable {
     private String adminId;
 
     public SessionAdmin(Admin admin) {
-        this.adminId = admin.getId();
+        this.adminId = admin.getAdminId();
     }
 }

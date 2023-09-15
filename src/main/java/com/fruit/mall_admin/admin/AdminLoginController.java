@@ -31,8 +31,8 @@ public class AdminLoginController {
     @PostMapping("/login")
     @ResponseBody
     public String loginConfirm(@RequestBody Admin inputData, HttpServletRequest request) {
-        Admin loginAdmin = adminService.selectAdminById(inputData.getId());
-        if (!adminService.loginCheck(inputData.getId(), inputData.getPassword(), loginAdmin)) {
+        Admin loginAdmin = adminService.selectAdminById(inputData.getAdminId());
+        if (!adminService.loginCheck(inputData.getAdminId(), inputData.getPassword(), loginAdmin)) {
             return "fail";
         }
         HttpSession session = request.getSession();
@@ -44,7 +44,7 @@ public class AdminLoginController {
     public String logout(HttpServletRequest request) {
         HttpSession session = request.getSession(false);
         if (session.getAttribute(LOGIN_ADMIN) != null) {
-            session.removeAttribute(LOGIN_ADMIN);
+            session.invalidate();
         }
         return "redirect:/admin/login";
     }

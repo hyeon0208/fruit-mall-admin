@@ -12,12 +12,12 @@ import java.io.Serializable;
 public class Admin implements Serializable {
     private static final long serialVersionUID = 1L;
 
-    private String id;
+    private String adminId;
     private String password;
 
     @Builder
-    public Admin(String id, String password) {
-        this.id = id;
+    public Admin(String adminId, String password) {
+        this.adminId = adminId;
         this.password = password;
     }
 }

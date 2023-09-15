@@ -14,7 +14,7 @@ public class AdminService {
     }
 
     public boolean loginCheck(String inputId, String inputPwd, Admin findAdmin) {
-        if (findAdmin == null || !findAdmin.getId().equals(inputId) || !findAdmin.getPassword().equals(inputPwd)) {
+        if (findAdmin == null || !findAdmin.getAdminId().equals(inputId) || !findAdmin.getPassword().equals(inputPwd)) {
             return false;
         }
         return true;
