@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fruit.mall_admin.review.ReviewMapper">
+    <select id="selectAllReview" resultType="com.fruit.mall_admin.review.dto.ReviewResDto">
+        SELECT
+            ROW_NUMBER() OVER (ORDER BY r.REVIEW_ID) AS NUM,
+                r.REVIEW_STATUS,
+            p.PRODUCT_NAME,
+            r.REVIEW_CONTENTS,
+            u.USER_EMAIL,
+            u.USER_NAME,
+            r.REVIEW_CREATED_AT
+        FROM review r
+                 JOIN product p ON r.PRODUCT_ID = p.PRODUCT_ID
+                 JOIN user u ON r.USER_ID_NO = u.USER_ID_NO
+    </select>
+</mapper>

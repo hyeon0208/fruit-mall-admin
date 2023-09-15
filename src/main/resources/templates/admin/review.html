@@ -1,0 +1,224 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/adminLayout}">
+<th:block layout:fragment="adminContent">
+
+    <section id="admin_review">
+        <div class="inner">
+            <div class="title">
+                <h2>리뷰관리</h2>
+            </div>
+
+            <div class="box01">
+                <ul>
+                    <li>
+                        전체리뷰 <span>100</span>건
+                    </li>
+                    <li>
+                        답변완료 <span>60</span>건
+                    </li>
+                    <li>
+                        미답변 <span>40</span>건
+                    </li>
+                </ul>
+            </div>
+
+            <div class="box02">
+                <div class="status">
+                    <span>답변상태</span>
+                    <div class="buttons">
+                        <button>답변완료</button>
+                        <button>미답변</button>
+                    </div>
+                </div>
+
+                <div class="sort">
+                    <span>기간검색</span>
+                    <div class="buttons">
+                        <button>당일</button>
+                        <button>1주</button>
+                        <button>1개월</button>
+                        <button>3개월</button>
+                        <button>6개월</button>
+                    </div>
+                    <input type="date" value="2023-07-01">
+                    <p>~</p>
+                    <input type="date" value="2023-07-30">
+                </div>
+
+                <div class="search">
+                    <span>검색</span>
+                    <select name="search">
+                        <option value="상품명">상품명</option>
+                        <option value="회원ID">회원ID</option>
+                        <option value="주문번호">주문번호</option>
+                        <option value="수령인명">수령인명</option>
+                    </select>
+                    <input type="text" placeholder="상품명 검색">
+                    <div class="buttons">
+                        <button>검색</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box03">
+                <div class="left">
+                    <span class="margin">검색결과 <span class="bold">5</span>건</span>
+                    <button>선택 게시중지</button>
+                    <button>선택삭제</button>
+                </div>
+
+                <div class="right">
+                    <select name="howmany">
+                        <option value="10개씩 보기">10개씩 보기</option>
+                        <option value="30개씩 보기">30개씩 보기</option>
+                        <option value="50개씩 보기">50개씩 보기</option>
+                        <option value="100개씩 보기">100개씩 보기</option>
+                    </select>
+
+                    <button>
+                        <span class="material-symbols-outlined">description</span>
+                        <span>엑셀 다운로드</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="box04">
+                <table class="product-table">
+                    <caption class="hidden">리뷰관리</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <input type="checkbox" checked>
+                            </th>
+                            <th scope="col">번호</th>
+                            <th scope="col">상태</th>
+                            <th scope="col">상품명</th>
+                            <th scope="col">리뷰내용</th>
+                            <th scope="col">작성자ID</th>
+                            <th scope="col">작성자 닉네임</th>
+                            <th scope="col">등록일</th>
+                            <th scope="col">답변등록</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="review : ${pageInfo.list}">
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                            <td th:text="${review.num}">05</td>
+                            <td th:text="${review.reviewStatus}">답변완료</td>
+                            <td th:text="${review.productName}">
+                                <a href="#">
+                                    프리미엄 선물용 사..
+                                </a>
+                            </td>
+                            <td th:text="${review.reviewContents}">어머니 선물로 샀는데 너무 달고 맛..</td>
+                            <td th:text="${review.userEmail}">fireraccoon@naver.com</td>
+                            <td th:text="${review.userName}">불타는너구리</td>
+                            <td th:text="${review.reviewCreatedAt}">2023. 03. 01</td>
+                            <td>
+                                <button>답변보기</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <a th:if="${pageInfo.hasPreviousPage}"
+                   th:href="@{/admin/review(pageNum=${pageInfo.prePage}, pageSize=${pageInfo.pageSize})}" class="prev">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </a>
+
+                <p class="numbers">
+                    <th:block th:each="i : ${pageInfo.navigatepageNums}">
+                        <a th:href="@{/admin/review(pageNum=${i}, pageSize=${pageInfo.pageSize})}"
+                           th:text="${i}" th:style="${i == pageInfo.pageNum} ? 'font-weight: bold; font-size: 16px;' : ''"></a>
+                    </th:block>
+                </p>
+
+                <a th:if="${pageInfo.hasNextPage}"
+                   th:href="@{/admin/review(pageNum=${pageInfo.nextPage}, pageSize=${pageInfo.pageSize})}" class="next">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </a>
+            </div>
+
+            <!-- 리뷰관리 답변하기 버튼 클릭시 모달창 -->
+            <div class="admin__review" style="display: none;">
+                <div class="admin__review__inner">
+
+                    <div class="top">
+                        <span>주문번호 12345678</span>
+                    </div>
+
+                    <div class="middle">
+                        <p>프리미엄 고당도 꿀수박</p>
+                        <input type="text">
+                        <span>불타는너구리 | 2023. 07. 01 (13:10:10) 작성</span>
+                        <div class="line"></div>
+                    </div>
+
+
+                    <div class="bottom">
+                        <p>리뷰답변</p>
+                        <input type="text">
+                        <span>15 / 500</span>
+
+                        <div class="admin__review__buttons">
+                            <button>
+                                <a href="#">취소하기</a>
+                            </button>
+                            <button>
+                                <a href="#">답변하기</a>
+                            </button>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+            <!-- 리뷰 작성 취소하기 버튼 클릭시 모달창 -->
+            <div class="admin__review__cancel" style="display: none;">
+                <div class="admin__review__cancel__inner">
+
+                    <div class="top">
+                        <span>알림</span>
+                    </div>
+
+                    <div class="middle">
+                        <p>작성중인 내용이 모두 삭제됩니다. <br>
+                            취소 하시겠습니까?</p>
+                    </div>
+
+
+                    <div class="bottom">
+                        <button>취소하기</button>
+                        <button>계속작성</button>
+                    </div>
+                </div>
+
+            </div>
+
+            <!-- 리뷰 작성 완료 모달창 -->
+            <div class="admin__review__confirm" style="display: none;">
+                <div class="admin__review__confirm__inner">
+
+                    <div class="top">
+                        <span>알림</span>
+                    </div>
+
+                    <div class="middle">
+                        <p>리뷰답변이 완료 되었습니다.</p>
+                    </div>
+
+
+                    <div class="bottom">
+                        <button>확인</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+</th:block>
+</html>
