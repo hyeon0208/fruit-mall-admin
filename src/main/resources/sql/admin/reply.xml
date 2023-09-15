@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fruit.mall_admin.reply.ReplyMapper">
+    <insert id="insertReply" parameterType="com.fruit.mall_admin.reply.Reply" keyProperty="replyId">
+        INSERT INTO reply (ADMIN_ID, REVIEW_ID, COMMENTS)
+        VALUES (
+                #{adminId},
+                #{reviewId},
+                #{comments}
+               )
+    </insert>
+
+    <update id="updateReplied">
+        UPDATE review
+        SET REVIEW_STATUS = '답변완료'
+        WHERE REVIEW_ID = ${reviewId};
+    </update>
+</mapper>

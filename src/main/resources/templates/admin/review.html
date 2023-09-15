@@ -101,23 +101,24 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr th:each="review : ${pageInfo.list}">
+                        <tr th:each="review : ${pageInfo.list}" class="review-table"
+                            th:data-order-number="${review.orderNumber}"
+                            th:data-review-id="${review.reviewId}">
                             <td>
                                 <input type="checkbox">
                             </td>
-                            <td th:text="${review.num}">05</td>
-                            <td th:text="${review.reviewStatus}">답변완료</td>
-                            <td th:text="${review.productName}">
-                                <a href="#">
-                                    프리미엄 선물용 사..
-                                </a>
-                            </td>
-                            <td th:text="${review.reviewContents}">어머니 선물로 샀는데 너무 달고 맛..</td>
-                            <td th:text="${review.userEmail}">fireraccoon@naver.com</td>
-                            <td th:text="${review.userName}">불타는너구리</td>
-                            <td th:text="${review.reviewCreatedAt}">2023. 03. 01</td>
+                            <td th:text="${review.num}">번호</td>
+                            <td th:text="${review.reviewStatus}">답변상태</td>
                             <td>
-                                <button>답변보기</button>
+                                <a href="#" class="productName" th:text="${review.productName}"></a>
+                            </td>
+                            <td class="reviewContents" th:text="${review.reviewContents}">리뷰내용</td>
+                            <td th:text="${review.userEmail}">회원이메일</td>
+                            <td class="userName" th:text="${review.userName}">회원이름</td>
+                            <td class="reviewCreatedAt" th:text="${review.reviewCreatedAt}">리뷰등록날짜</td>
+                            <td>
+                                <button class="add_reply" th:if="${review.reviewStatus == '미답변'}" style="background-color: #173877; color: white">답변하기</button>
+                                <button class="show_reply" th:if="${review.reviewStatus == '답변완료'}">답변보기</button>
                             </td>
                         </tr>
                     </tbody>
@@ -146,23 +147,21 @@
             <!-- 리뷰관리 답변하기 버튼 클릭시 모달창 -->
             <div class="admin__review" style="display: none;">
                 <div class="admin__review__inner">
-
                     <div class="top">
-                        <span>주문번호 12345678</span>
+                        <span id="modal-orderNumber">주문번호</span>
                     </div>
 
                     <div class="middle">
-                        <p>프리미엄 고당도 꿀수박</p>
-                        <input type="text">
-                        <span>불타는너구리 | 2023. 07. 01 (13:10:10) 작성</span>
+                        <p id="modal-productName">상품이름</p>
+                        <input id="modal-contents" type="text" disabled>
+                        <span id="modal-name-time">닉네임 | 2023.07.01 (13:10:10) 작성</span>
                         <div class="line"></div>
                     </div>
 
-
                     <div class="bottom">
                         <p>리뷰답변</p>
-                        <input type="text">
-                        <span>15 / 500</span>
+                        <input type="text" id="replyContent">
+                        <span id="content__count">0 / 500</span>
 
                         <div class="admin__review__buttons">
                             <button>
@@ -173,14 +172,12 @@
                             </button>
                         </div>
                     </div>
-
                 </div>
             </div>
 
             <!-- 리뷰 작성 취소하기 버튼 클릭시 모달창 -->
             <div class="admin__review__cancel" style="display: none;">
                 <div class="admin__review__cancel__inner">
-
                     <div class="top">
                         <span>알림</span>
                     </div>
@@ -196,13 +193,11 @@
                         <button>계속작성</button>
                     </div>
                 </div>
-
             </div>
 
             <!-- 리뷰 작성 완료 모달창 -->
             <div class="admin__review__confirm" style="display: none;">
                 <div class="admin__review__confirm__inner">
-
                     <div class="top">
                         <span>알림</span>
                     </div>
@@ -211,12 +206,10 @@
                         <p>리뷰답변이 완료 되었습니다.</p>
                     </div>
 
-
                     <div class="bottom">
                         <button>확인</button>
                     </div>
                 </div>
-
             </div>
         </div>
     </section>
