@@ -13,6 +13,16 @@
     <update id="updateReplied">
         UPDATE review
         SET REVIEW_STATUS = '답변완료'
-        WHERE REVIEW_ID = ${reviewId};
+        WHERE REVIEW_ID = #{reviewId};
     </update>
+
+    <update id="updateComments" parameterType="com.fruit.mall_admin.reply.Reply">
+        UPDATE reply
+        SET COMMENTS = #{comments}
+        WHERE REVIEW_ID = #{reviewId};
+    </update>
+
+    <select id="selectReplyByReviewId" resultType="String">
+        SELECT COMMENTS FROM reply WHERE REVIEW_ID = #{reviewId}
+    </select>
 </mapper>

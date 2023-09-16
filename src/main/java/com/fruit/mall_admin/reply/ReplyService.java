@@ -5,6 +5,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Optional;
+
 @Service
 @Transactional
 @RequiredArgsConstructor
@@ -16,4 +18,12 @@ public class ReplyService {
         replyRepository.insertReply(reply);
         replyRepository.updateReplied(dto.getReviewId());
     }
-}
+
+    public Optional<String> selectReplyByReviewId(Long reviewId) {
+        return replyRepository.selectReplyByReviewId(reviewId);
+    }
+
+    public void updateComments(ReplySaveDto dto) {
+        Reply reply = dto.toEntity(dto);
+        replyRepository.updateComments(reply);
+    }}
