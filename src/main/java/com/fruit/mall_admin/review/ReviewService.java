@@ -29,6 +29,9 @@ public class ReviewService {
         return new PageInfo<>(reviews);
     }
 
+    public void deleteByReviewId(Long reviewId) {
+        reviewRepository.deleteByReviewId(reviewId);
+    }
 
     public ReviewCountDto countReviews() {
         return reviewRepository.countReviews();

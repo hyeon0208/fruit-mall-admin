@@ -35,4 +35,10 @@
             (SELECT COUNT(*) FROM review  WHERE REVIEW_STATUS = '답변완료') AS completedRepliedCount,
             (SELECT COUNT(*) FROM review WHERE REVIEW_STATUS = '미답변') AS notRepliedCount;
     </select>
+
+    <delete id="deleteByReviewId">
+        DELETE
+        from review
+        WHERE REVIEW_ID = #{reviewId};
+    </delete>
 </mapper>

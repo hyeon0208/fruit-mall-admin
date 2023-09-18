@@ -26,23 +26,23 @@
                 <div class="status">
                     <span>답변상태</span>
                     <div class="buttons">
-                        <button>답변완료</button>
-                        <button>미답변</button>
+                        <button class="replied">답변완료</button>
+                        <button class="unreplied">미답변</button>
                     </div>
                 </div>
 
                 <div class="sort">
                     <span>기간검색</span>
                     <div class="buttons">
-                        <button>당일</button>
-                        <button>1주</button>
-                        <button>1개월</button>
-                        <button>3개월</button>
-                        <button>6개월</button>
+                        <button class="durationBtn" data-click-cnt="0" value="1">당일</button>
+                        <button class="durationBtn" data-click-cnt="0" value="7">1주</button>
+                        <button class="durationBtn" data-click-cnt="0" value="30">1개월</button>
+                        <button class="durationBtn" data-click-cnt="0" value="90">3개월</button>
+                        <button class="durationBtn" data-click-cnt="0" value="180">6개월</button>
                     </div>
-                    <input type="date" value="2023-07-01">
+                    <input type="date" id="date1">
                     <p>~</p>
-                    <input type="date" value="2023-07-30">
+                    <input type="date" id="date2">
                 </div>
 
                 <div class="search">
@@ -50,8 +50,8 @@
                     <select name="search">
                         <option value="상품명">상품명</option>
                         <option value="회원ID">회원ID</option>
-                        <option value="주문번호">주문번호</option>
-                        <option value="수령인명">수령인명</option>
+<!--                        <option value="주문번호">주문번호</option>-->
+<!--                        <option value="수령인명">수령인명</option>-->
                     </select>
                     <input type="text" placeholder="상품명 검색">
                     <div class="buttons">
@@ -62,9 +62,8 @@
 
             <div class="box03">
                 <div class="left">
-                    <span class="margin">검색결과 <span class="bold">5</span>건</span>
-                    <button>선택 게시중지</button>
-                    <button>선택삭제</button>
+                    <span class="margin">검색결과 <span class="bold" th:text="${totalCount}"></span>건</span>
+                    <button id="del-reviewBtn">선택 리뷰 삭제</button>
                 </div>
 
                 <div class="right">
@@ -88,7 +87,7 @@
                     <thead>
                         <tr>
                             <th scope="col">
-                                <input type="checkbox" checked>
+                                <input id="allCheck" type="checkbox">
                             </th>
                             <th scope="col">번호</th>
                             <th scope="col">상태</th>
@@ -105,7 +104,7 @@
                             th:data-order-number="${review.orderNumber}"
                             th:data-review-id="${review.reviewId}">
                             <td>
-                                <input type="checkbox">
+                                <input class="pageChk" type="checkbox">
                             </td>
                             <td th:text="${review.num}">번호</td>
                             <td th:text="${review.reviewStatus}">답변상태</td>

@@ -24,6 +24,11 @@ public class ReviewRepository implements ReviewMapper {
     }
 
     @Override
+    public void deleteByReviewId(Long reviewId) {
+        reviewMapper.deleteByReviewId(reviewId);
+    }
+
+    @Override
     public ReviewCountDto countReviews() {
         return reviewMapper.countReviews();
     }

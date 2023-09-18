@@ -33,7 +33,6 @@ $(document).on("click", ".editBtn", (e) => {
 $(document).on("click", "#allCheck", (e) => {
     // chk1 체크박스의 체크 여부에 따라 모든 체크박스 상태를 변경
     const isChecked = $(e.target).prop("checked");
-    console.log(isChecked);
     $("input[type='checkbox']").prop("checked", isChecked);
 });
 
