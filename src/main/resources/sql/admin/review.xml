@@ -16,7 +16,45 @@
                  JOIN product p ON r.PRODUCT_ID = p.PRODUCT_ID
                  JOIN user u ON r.USER_ID_NO = u.USER_ID_NO
                  JOIN orders o ON r.ORDER_ID = o.ORDER_ID;
+    </select>
 
+    <select id="selectAllBySearchCond" parameterType="com.fruit.mall_admin.review.dto.ReviewSearchCond" resultType="com.fruit.mall_admin.review.dto.ReviewResDto">
+        SELECT ROW_NUMBER() OVER (ORDER BY r.REVIEW_ID) AS NUM,
+        p.PRODUCT_ID,
+        r.REVIEW_ID,
+        o.ORDER_NUMBER,
+        r.REVIEW_STATUS,
+        p.PRODUCT_NAME,
+        r.REVIEW_CONTENTS,
+        u.USER_EMAIL,
+        u.USER_NAME,
+        r.REVIEW_CREATED_AT
+        FROM review r
+        JOIN product p ON r.PRODUCT_ID = p.PRODUCT_ID
+        JOIN user u ON r.USER_ID_NO = u.USER_ID_NO
+        JOIN orders o ON r.ORDER_ID = o.ORDER_ID
+        <where>
+            <if test="status != null and status != ''">
+                AND r.REVIEW_STATUS = #{status}
+            </if>
+            <if test="duration != null and duration != ''">
+                AND r.REVIEW_CREATED_AT >= DATE_SUB(CURDATE(), INTERVAL #{duration} DAY)
+            </if>
+            <if test="startDate != null and startDate != '' and endDate != null and endDate != ''">
+                AND r.REVIEW_CREATED_AT BETWEEN TIMESTAMP(#{startDate}, '00:00:00') AND TIMESTAMP(#{endDate},
+                '23:59:59')
+            </if>
+            <if test="category != null and category != ''">
+                <choose>
+                    <when test="category == '상품명'">
+                        AND p.PRODUCT_NAME LIKE CONCAT('%', #{searchText}, '%')
+                    </when>
+                    <when test="category == '회원ID'">
+                        AND u.USER_NAME = #{searchText}
+                    </when>
+                </choose>
+            </if>
+        </where>
     </select>
 
     <select id="selectAllByProductId" resultType="com.fruit.mall_admin.review.dto.DetailReviewDto">

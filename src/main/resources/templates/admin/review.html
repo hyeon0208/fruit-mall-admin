@@ -26,8 +26,8 @@
                 <div class="status">
                     <span>답변상태</span>
                     <div class="buttons">
-                        <button class="replied">답변완료</button>
-                        <button class="unreplied">미답변</button>
+                        <button class="replyCondBtn">답변완료</button>
+                        <button class="replyCondBtn">미답변</button>
                     </div>
                 </div>
 
@@ -47,15 +47,15 @@
 
                 <div class="search">
                     <span>검색</span>
-                    <select name="search">
+                    <select id="categories" name="search">
                         <option value="상품명">상품명</option>
                         <option value="회원ID">회원ID</option>
 <!--                        <option value="주문번호">주문번호</option>-->
 <!--                        <option value="수령인명">수령인명</option>-->
                     </select>
-                    <input type="text" placeholder="상품명 검색">
+                    <input id="searchText" type="text" placeholder="상품명 검색">
                     <div class="buttons">
-                        <button>검색</button>
+                        <button id="searchReview">검색</button>
                     </div>
                 </div>
             </div>

@@ -1171,12 +1171,12 @@
   border: 1px solid #333;
   cursor: pointer;
 }
-#admin_review .inner .box02 .status .buttons button:nth-of-type(3),
-#admin_review .inner .box02 .sort .buttons button:nth-of-type(3),
-#admin_review .inner .box02 .search .buttons button:nth-of-type(3) {
-  background-color: #333;
-  color: #fff;
-}
+/*#admin_review .inner .box02 .status .buttons button:nth-of-type(3),*/
+/*#admin_review .inner .box02 .sort .buttons button:nth-of-type(3),*/
+/*#admin_review .inner .box02 .search .buttons button:nth-of-type(3) {*/
+/*  background-color: #333;*/
+/*  color: #fff;*/
+/*}*/
 #admin_review .inner .box02 .status input,
 #admin_review .inner .box02 .sort input,
 #admin_review .inner .box02 .search input {
