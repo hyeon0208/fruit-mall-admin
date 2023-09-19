@@ -60,6 +60,17 @@ $(document).on("click", ".add_reply", (e) =>  {
             dataType: "json",
             headers: {'Content-Type': 'application/json'}
         }).then(res => {
+            axios({
+                url: "/api/v1/reply/notifications",
+                method: "post",
+                data: {
+                    productName: productName,
+                    reviewId: reviewId
+                },
+                dataType: "json",
+                headers: {'Content-Type': 'application/json'}
+            })
+
             $(".admin__review__confirm").show();
             $(".admin__review__confirm button").on("click", () => {
                 $(".admin__review__confirm").hide();

@@ -43,4 +43,8 @@ public class ReviewService {
     public ReviewCountDto countReviews() {
         return reviewRepository.countReviews();
     }
+
+    public Long selectUserIdByReviewId(Long userId) {
+        return reviewRepository.selectUserIdByReviewId(userId);
+    }
 }

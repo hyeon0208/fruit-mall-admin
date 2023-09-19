@@ -79,4 +79,8 @@
         from review
         WHERE REVIEW_ID = #{reviewId};
     </delete>
+
+    <select id="selectUserIdByReviewId" resultType="Long">
+        SELECT USER_ID_NO FROM review WHERE REVIEW_ID = #{userIdNo}
+    </select>
 </mapper>

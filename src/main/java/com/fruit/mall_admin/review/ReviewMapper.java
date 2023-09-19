@@ -20,4 +20,6 @@ public interface ReviewMapper {
     ReviewCountDto countReviews();
 
     void deleteByReviewId(@Param("reviewId") Long reviewId);
+
+    Long selectUserIdByReviewId(@Param("userIdNo") Long userId);
 }

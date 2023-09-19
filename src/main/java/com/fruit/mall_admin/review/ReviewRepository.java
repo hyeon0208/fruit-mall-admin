@@ -38,4 +38,9 @@ public class ReviewRepository implements ReviewMapper {
     public ReviewCountDto countReviews() {
         return reviewMapper.countReviews();
     }
+
+    @Override
+    public Long selectUserIdByReviewId(Long userId) {
+        return reviewMapper.selectUserIdByReviewId(userId);
+    }
 }
