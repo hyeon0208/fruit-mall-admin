@@ -19,8 +19,8 @@ public class NotificationsController {
     @PostMapping("/reply/notifications")
     public ResponseEntity<?> sendReplyNotifications(@RequestBody NotificationsDto dto) {
         Long userId = reviewService.selectUserIdByReviewId(dto.getReviewId());
-        String message = dto.getProductName() + "상품의 리뷰에 판매자가 댓글을 남겼습니다.";
-        notificationsService.commentNotificationCreate(String.valueOf(userId), message);
+        String message = dto.getProductName() + " 상품의 리뷰에 판매자가 댓글을 남겼습니다.";
+        notificationsService.commentNotificationCreate(String.valueOf(userId), dto.getReviewId(), message);
         return ResponseEntity.ok().build();
     }
 }

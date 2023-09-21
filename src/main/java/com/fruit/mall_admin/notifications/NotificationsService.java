@@ -12,8 +12,8 @@ import org.springframework.stereotype.Service;
 public class NotificationsService {
     private final KafkaTemplate<String, NotificationMessage> kafkaTemplate;
 
-    public void commentNotificationCreate(String userId, String message) {
-        NotificationMessage notificationMessage = new NotificationMessage(userId , message);
+    public void commentNotificationCreate(String userId, Long reviewId, String message) {
+        NotificationMessage notificationMessage = new NotificationMessage(reviewId, userId, message);
         log.info("리뷰 답글 알림 전송. userId : {}, message : {}",userId, message);
         kafkaTemplate.send("comment-notifications", notificationMessage);
     }
