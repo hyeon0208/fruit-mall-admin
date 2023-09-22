@@ -34,4 +34,8 @@
                 (SELECT COUNT(*) FROM user  WHERE USER_STATUS = '활동중') AS activeCount,
                 (SELECT COUNT(*) FROM user WHERE USER_STATUS = '탈퇴') AS withdrawCount;
     </select>
+
+    <update id="updateUserStatusByUserIdNo">
+        UPDATE user SET USER_STATUS = '탈퇴' WHERE USER_ID_NO = #{userIdNo}
+    </update>
 </mapper>

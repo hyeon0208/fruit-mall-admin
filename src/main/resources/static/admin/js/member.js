@@ -32,3 +32,32 @@ $(document).on("click", ".deliveryShowBtn", (e) => {
         alert("배송정보가 없습니다.");
     });
 });
+
+$(document).on("click", ".withdrawBtn", (e) => {
+    const userIdNo = $(e.currentTarget).data("user-id");
+
+    $(".admin__cancel").show();
+    $(".admin__cancel button:eq(0)").on("click", () => {
+        $(".admin__cancel").hide();
+    });
+
+    $(".admin__cancel button:eq(1)").on("click", () => {
+        axios({
+            url: "/api/v1/withdraw",
+            method: "post",
+            data: {
+                userIdNo: userIdNo
+            },
+            dataType: "json",
+            headers: {'Content-Type': 'application/json'}
+        }).then(res => {
+            $(".admin__cancel__confirm").show();
+
+            $(".admin__cancel__confirm button").on("click", () => {
+                $(".admin__cancel__confirm").hide();
+                $(".admin__cancel").hide();
+                window.location.href = "/admin/member"
+            });
+        });
+    });
+});

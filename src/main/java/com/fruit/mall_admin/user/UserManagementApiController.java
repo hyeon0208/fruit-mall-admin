@@ -6,6 +6,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 @RequiredArgsConstructor
@@ -22,5 +23,12 @@ public class UserManagementApiController {
             return ResponseEntity.badRequest().build();
         }
         return ResponseEntity.ok(userService.selectDeliveriesByUserId(userIdNo));
+    }
+
+    @ResponseBody
+    @PostMapping("/withdraw")
+    public ResponseEntity<?> withdraw(@RequestBody Map<String, Long> data) {
+        userService.updateUserStatusByUserIdNo(data.get("userIdNo"));
+        return ResponseEntity.ok().build();
     }
 }

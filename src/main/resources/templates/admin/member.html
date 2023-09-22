@@ -45,7 +45,6 @@
             <div class="box03">
                 <div class="left">
                     <span class="margin">검색결과 <span class="bold" th:text="${userInfos.total}"></span>건</span>
-                    <button>선택 탈퇴처리</button>
                 </div>
 
                 <div class="right">
@@ -97,7 +96,8 @@
                             </td>
                             <td th:text="${user.userCreatedAt}" class="time">2023. 03. 01</td>
                             <td>
-                                <button>탈퇴</button>
+                                <button th:if="${user.userStatus == '활동중'}" class="withdrawBtn" th:data-user-id="${user.userIdNo}">탈퇴</button>
+                                <text th:if="${user.userStatus == '탈퇴'}">-</text>
                             </td>
                         </tr>
                     </tbody>
@@ -177,7 +177,7 @@
 
                 <div class="middle">
                     <p>탈퇴된 회원은 복구할 수 없습니다. <br>
-                        fireraccoon@naver.com을 회원탈퇴 하시겠습니까?</p>
+                        회원탈퇴 처리 하시겠습니까?</p>
                 </div>
 
 

@@ -28,4 +28,9 @@ public class UserRepository implements UserMapper {
     public UserCountDto countUsersByStatus() {
         return userMapper.countUsersByStatus();
     }
+
+    @Override
+    public void updateUserStatusByUserIdNo(Long userIdNo) {
+        userMapper.updateUserStatusByUserIdNo(userIdNo);
+    }
 }

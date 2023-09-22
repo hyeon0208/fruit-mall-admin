@@ -31,4 +31,8 @@ public class UserService {
     public UserCountDto countUsersByStatus() {
         return userRepository.countUsersByStatus();
     }
+
+    public void updateUserStatusByUserIdNo(Long userIdNo) {
+        userRepository.updateUserStatusByUserIdNo(userIdNo);
+    }
 }

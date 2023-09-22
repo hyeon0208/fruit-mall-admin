@@ -16,4 +16,6 @@ public interface UserMapper {
     List<UserDelivery> selectDeliveriesByUserId(@Param("userIdNo") Long userIdNo);
 
     UserCountDto countUsersByStatus();
+
+    void updateUserStatusByUserIdNo(@Param("userIdNo") Long userIdNo);
 }
