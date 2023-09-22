@@ -1,5 +1,6 @@
 package com.fruit.mall_admin.user;
 
+import com.fruit.mall_admin.user.dto.UserCountDto;
 import com.fruit.mall_admin.user.dto.UserDelivery;
 import com.fruit.mall_admin.user.dto.UserInfoDto;
 import org.apache.ibatis.annotations.Mapper;
@@ -13,4 +14,6 @@ public interface UserMapper {
     List<UserInfoDto> selectUserInfo();
 
     List<UserDelivery> selectDeliveriesByUserId(@Param("userIdNo") Long userIdNo);
+
+    UserCountDto countUsersByStatus();
 }

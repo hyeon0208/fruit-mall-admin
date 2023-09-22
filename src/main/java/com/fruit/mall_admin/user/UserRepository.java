@@ -1,6 +1,7 @@
 package com.fruit.mall_admin.user;
 
 import com.fruit.mall_admin.user.UserMapper;
+import com.fruit.mall_admin.user.dto.UserCountDto;
 import com.fruit.mall_admin.user.dto.UserDelivery;
 import com.fruit.mall_admin.user.dto.UserInfoDto;
 import lombok.RequiredArgsConstructor;
@@ -21,5 +22,10 @@ public class UserRepository implements UserMapper {
     @Override
     public List<UserDelivery> selectDeliveriesByUserId(Long userIdNo) {
         return userMapper.selectDeliveriesByUserId(userIdNo);
+    }
+
+    @Override
+    public UserCountDto countUsersByStatus() {
+        return userMapper.countUsersByStatus();
     }
 }

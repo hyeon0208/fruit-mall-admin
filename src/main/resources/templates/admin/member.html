@@ -10,13 +10,13 @@
             <div class="box01">
                 <ul>
                     <li>
-                        전체회원 <span>450</span>명
+                        전체회원 <span th:text="${count.totalUserCount}"></span>명
                     </li>
                     <li>
-                        활동회원 <span>423</span>명
+                        활동회원 <span th:text="${count.activeCount}"></span>명
                     </li>
                     <li>
-                        탈퇴회원 <span>27</span>명
+                        탈퇴회원 <span th:text="${count.withdrawCount}"></span>명
                     </li>
                 </ul>
             </div>
@@ -44,9 +44,8 @@
 
             <div class="box03">
                 <div class="left">
-                    <span class="margin">검색결과 <span class="bold">5</span>건</span>
+                    <span class="margin">검색결과 <span class="bold" th:text="${userInfos.total}"></span>건</span>
                     <button>선택 탈퇴처리</button>
-                    <button>선택삭제</button>
                 </div>
 
                 <div class="right">

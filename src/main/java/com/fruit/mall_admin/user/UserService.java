@@ -1,6 +1,7 @@
 package com.fruit.mall_admin.user;
 
 import com.fruit.mall_admin.review.dto.ReviewResDto;
+import com.fruit.mall_admin.user.dto.UserCountDto;
 import com.fruit.mall_admin.user.dto.UserDelivery;
 import com.fruit.mall_admin.user.dto.UserInfoDto;
 import com.github.pagehelper.PageHelper;
@@ -25,5 +26,9 @@ public class UserService {
 
     public List<UserDelivery> selectDeliveriesByUserId(Long userIdNo) {
         return userRepository.selectDeliveriesByUserId(userIdNo);
+    }
+
+    public UserCountDto countUsersByStatus() {
+        return userRepository.countUsersByStatus();
     }
 }

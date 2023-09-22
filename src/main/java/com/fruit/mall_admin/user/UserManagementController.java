@@ -21,6 +21,7 @@ public class UserManagementController {
                        @RequestParam(value = "pageSize", defaultValue = "5") int pageSize) {
         PageInfo<UserInfoDto> userInfos = userService.selectUserInfo(pageNum, pageSize);
         model.addAttribute("userInfos", userInfos);
+        model.addAttribute("count", userService.countUsersByStatus());
         return "admin/member";
     }
 }
