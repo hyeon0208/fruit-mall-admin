@@ -1,6 +1,5 @@
 package com.fruit.mall_admin.user.dto;
 
-import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 

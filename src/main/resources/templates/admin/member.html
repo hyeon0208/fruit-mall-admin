@@ -93,9 +93,10 @@
                             <td th:text="${user.userEmail}"></td>
                             <td th:text="${user.orderCount}"></td>
                             <td>
-                                <button>보기</button>
+                                <button class="deliveryShowBtn"
+                                th:data-user-id="${user.userIdNo}">보기</button>
                             </td>
-                            <td th:text="${user.userCreatedAt}">2023. 03. 01</td>
+                            <td th:text="${user.userCreatedAt}" class="time">2023. 03. 01</td>
                             <td>
                                 <button>탈퇴</button>
                             </td>
@@ -124,10 +125,8 @@
             </div>
 
 
-
-
         <!-- 주소록 보기 버튼 클릭시 모달창 -->
-        <div class="admin__delivery" style="display: none;">
+        <div class="admin__delivery" style="display: none;" th:data-userInfo="${userInfos.getList()}">
             <div class="admin__delivery__inner">
 
                 <div class="top">
@@ -160,14 +159,12 @@
                         </li>
                     </ul>
 
-
                     <div class="admin__delivery__buttons">
                         <button>
                             <a href="#">닫기</a>
                         </button>
                     </div>
                 </div>
-
             </div>
         </div>
 
@@ -210,96 +207,6 @@
                     <button>확인</button>
                 </div>
             </div>
-
-        </div>
-
-        <!-- 회원관리 구매수량 버튼 클릭시 모달창 -->
-        <div class="admin__quantity" style="display: none;">
-            <div class="admin__quantity__inner">
-
-                <div class="top">
-                    <span>알림</span>
-                </div>
-
-                <div class="middle01">
-                    <span>[구매상품 목록]</span>
-                    <span>회원ID:
-                        <span>fireraccoon@naver.com</span>
-                    </span>
-                </div>
-
-                <div class="middle02">
-                    <div class="bottom__txt">
-                        <span>상품이미지</span>
-                        <span>상품명/구매금액</span>
-                        <span>구매일</span>
-                    </div>
-
-                    <ul>
-                        <li>
-                            <img src="./img/모달이미지.png" alt="모달이미지">
-                            <div class="li_txt">
-                                <span>프리미엄 고당도.. 외 2개</span>
-                                <span>50,000원</span>
-                            </div>
-                            <span>2023. 03. 12</span>
-                        </li>
-                        <li>
-                            <img src="./img/모달이미지.png" alt="모달이미지">
-                            <div class="li_txt">
-                                <span>프리미엄 고당도.. 외 2개</span>
-                                <span>50,000원</span>
-                            </div>
-                            <span>2023. 03. 12</span>
-                        </li>
-                        <li>
-                            <img src="./img/모달이미지.png" alt="모달이미지">
-                            <div class="li_txt">
-                                <span>프리미엄 고당도.. 외 2개</span>
-                                <span>50,000원</span>
-                            </div>
-                            <span>2023. 03. 12</span>
-                        </li>
-                    </ul>
-
-                    <div class="pagination">
-                        <a href="#" class="prev">
-                            <span class="material-symbols-outlined">
-                                chevron_left
-                            </span>
-                        </a>
-
-                        <p class="numbers">
-                            <a href="#">1</a>
-                            <a href="#">2</a>
-                            <a href="#">3</a>
-                            <a href="#">
-                                <span class="bold">4</span>
-                            </a>
-                            <a href="#">5</a>
-                        </p>
-
-                        <a href="#" class="next">
-                            <span class="material-symbols-outlined">
-                                chevron_right
-                            </span>
-                        </a>
-                    </div>
-
-                    <div class="bottom">
-                        <span>구매금액 합계</span>
-                        <span>150,000원</span>
-                    </div>
-                </div>
-
-
-
-
-                <div class="admin__quantity__buttons">
-                    <button>
-                        <a href="#">닫기</a>
-                    </button>
-                </div>
             </div>
         </div>
     </section>
