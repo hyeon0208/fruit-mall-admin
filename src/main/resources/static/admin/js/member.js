@@ -33,6 +33,15 @@ $(document).on("click", ".deliveryShowBtn", (e) => {
     });
 });
 
+$(document).on("click", ".userStatusBtn", (e) => {
+    let btn = $(e.currentTarget);
+    $(".userStatusBtn").css("background-color", "");
+    $(".userStatusBtn").css("color", "");
+
+    btn.css("background-color", "rgb(39 33 33)");
+    btn.css("color", "white");
+});
+
 $(document).on("click", ".withdrawBtn", (e) => {
     const userIdNo = $(e.currentTarget).data("user-id");
 
