@@ -16,7 +16,46 @@
                  LEFT JOIN delivery d on u.USER_ID_NO = d.USER_ID_NO
         GROUP BY u.USER_ID_NO
     </select>
-    
+
+    <select id="selectUserInfoBySearchCond" parameterType="com.fruit.mall_admin.user.dto.UserSearchCond" resultType="com.fruit.mall_admin.user.dto.UserInfoDto">
+        SELECT
+            u.USER_ID_NO,
+            ROW_NUMBER() OVER (ORDER BY u.USER_ID_NO) AS NUM,
+            u.USER_STATUS,
+            u.USER_NAME,
+            u.USER_EMAIL,
+            COUNT(op.ORDER_ID) AS ORDER_COUNT,
+            u.USER_CREATED_AT
+        FROM user u
+                 LEFT JOIN orders o ON o.USER_ID_NO = u.USER_ID_NO
+                 LEFT JOIN order_product op on o.ORDER_ID = op.ORDER_ID
+                 LEFT JOIN delivery d on u.USER_ID_NO = d.USER_ID_NO
+        <where>
+            <if test="userStatus != null and userStatus != ''">
+                <choose>
+                    <when test="userStatus == '활동회원'">
+                        AND u.USER_STATUS = '활동중'
+                    </when>
+                    <when test="userStatus == '탈퇴회원'">
+                        AND u.USER_STATUS = '탈퇴'
+                    </when>
+                </choose>
+            </if>
+
+            <if test="userSearchCategory != null and userSearchCategory != ''">
+                <choose>
+                    <when test="userSearchCategory == '회원ID'">
+                        AND u.USER_EMAIL = #{userSearchText}
+                    </when>
+                    <when test="userSearchCategory == '닉네임'">
+                        AND u.USER_NAME = #{userSearchText}
+                    </when>
+                </choose>
+            </if>
+        </where>
+        GROUP BY u.USER_ID_NO
+    </select>
+
     <select id="selectDeliveriesByUserId" resultType="com.fruit.mall_admin.user.dto.UserDelivery">
         SELECT
             DELIVERY_NAME,

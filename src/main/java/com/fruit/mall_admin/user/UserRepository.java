@@ -4,6 +4,7 @@ import com.fruit.mall_admin.user.UserMapper;
 import com.fruit.mall_admin.user.dto.UserCountDto;
 import com.fruit.mall_admin.user.dto.UserDelivery;
 import com.fruit.mall_admin.user.dto.UserInfoDto;
+import com.fruit.mall_admin.user.dto.UserSearchCond;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Repository;
 
@@ -17,6 +18,11 @@ public class UserRepository implements UserMapper {
     @Override
     public List<UserInfoDto> selectUserInfo() {
         return userMapper.selectUserInfo();
+    }
+
+    @Override
+    public List<UserInfoDto> selectUserInfoBySearchCond(UserSearchCond cond) {
+        return userMapper.selectUserInfoBySearchCond(cond);
     }
 
     @Override

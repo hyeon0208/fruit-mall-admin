@@ -4,6 +4,7 @@ import com.fruit.mall_admin.review.dto.ReviewResDto;
 import com.fruit.mall_admin.user.dto.UserCountDto;
 import com.fruit.mall_admin.user.dto.UserDelivery;
 import com.fruit.mall_admin.user.dto.UserInfoDto;
+import com.fruit.mall_admin.user.dto.UserSearchCond;
 import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import lombok.RequiredArgsConstructor;
@@ -21,6 +22,12 @@ public class UserService {
     public PageInfo<UserInfoDto> selectUserInfo(int pageNum, int pageSize) {
         PageHelper.startPage(pageNum, pageSize, "NUM DESC");
         List<UserInfoDto> userInfos = userRepository.selectUserInfo();
+        return new PageInfo<>(userInfos);
+    }
+
+    public PageInfo<UserInfoDto> getUsersBySearchCond(UserSearchCond cond) {
+        PageHelper.startPage(cond.getUserPageNum(), cond.getUserPageSize(), "NUM DESC");
+        List<UserInfoDto> userInfos = userRepository.selectUserInfoBySearchCond(cond);
         return new PageInfo<>(userInfos);
     }
 
