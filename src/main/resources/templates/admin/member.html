@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout" layout:decorate="~{layout/adminLayout}">
+<th:block layout:fragment="adminContent">
+    <section id="admin_member">
+        <div class="inner">
+            <div class="title">
+                <h2>회원관리</h2>
+            </div>
+
+            <div class="box01">
+                <ul>
+                    <li>
+                        전체회원 <span>450</span>명
+                    </li>
+                    <li>
+                        활동회원 <span>423</span>명
+                    </li>
+                    <li>
+                        탈퇴회원 <span>27</span>명
+                    </li>
+                </ul>
+            </div>
+
+            <div class="box02">
+                <div class="status">
+                    <span>게시상태</span>
+                    <div class="buttons">
+                        <button>활동회원</button>
+                        <button>탈퇴회원</button>
+                    </div>
+                </div>
+                <div class="search">
+                    <span>검색</span>
+                    <select name="sort">
+                        <option value="회원ID">회원ID</option>
+                        <option value="닉네임">닉네임</option>
+                    </select>
+                    <input type="text" placeholder="회원 검색">
+                    <div class="buttons">
+                        <button>검색</button>
+                    </div>
+                </div>
+            </div>
+
+            <div class="box03">
+                <div class="left">
+                    <span class="margin">검색결과 <span class="bold">5</span>건</span>
+                    <button>선택 탈퇴처리</button>
+                    <button>선택삭제</button>
+                </div>
+
+                <div class="right">
+                    <select name="howmany">
+                        <option value="10개씩 보기">10개씩 보기</option>
+                        <option value="30개씩 보기">30개씩 보기</option>
+                        <option value="50개씩 보기">50개씩 보기</option>
+                        <option value="100개씩 보기">100개씩 보기</option>
+                    </select>
+
+                    <button>
+                        <span class="material-symbols-outlined">description</span>
+                        <span>엑셀 다운로드</span>
+                    </button>
+                </div>
+            </div>
+
+            <div class="box04">
+                <table class="product-table">
+                    <caption class="hidden">상품관리</caption>
+                    <thead>
+                        <tr>
+                            <th scope="col">
+                                <input type="checkbox" checked>
+                            </th>
+                            <th scope="col">번호</th>
+                            <th scope="col">상태</th>
+                            <th scope="col">닉네임</th>
+                            <th scope="col">회원아이디</th>
+                            <th scope="col">구매수량</th>
+                            <th scope="col">주소록</th>
+                            <th scope="col">가입일</th>
+                            <th scope="col">탈퇴처리</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr th:each="user : ${userInfos.getList()}">
+                            <td>
+                                <input type="checkbox">
+                            </td>
+                            <td th:text="${user.num}"></td>
+                            <td th:text="${user.userStatus}"></td>
+                            <td th:text="${user.userName}"></td>
+                            <td th:text="${user.userEmail}"></td>
+                            <td th:text="${user.orderCount}"></td>
+                            <td>
+                                <button>보기</button>
+                            </td>
+                            <td th:text="${user.userCreatedAt}">2023. 03. 01</td>
+                            <td>
+                                <button>탈퇴</button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="pagination">
+                <a th:if="${userInfos.hasPreviousPage}"
+                   th:href="@{/admin/member(pageNum=${userInfos.prePage}, pageSize=${userInfos.pageSize})}" class="prev">
+                    <span class="material-symbols-outlined">chevron_left</span>
+                </a>
+
+                <p class="numbers">
+                    <th:block th:each="i : ${userInfos.navigatepageNums}">
+                        <a th:href="@{/admin/member(pageNum=${i}, pageSize=${userInfos.pageSize})}"
+                           th:text="${i}" th:style="${i == userInfos.pageNum} ? 'font-weight: bold; font-size: 16px;' : ''"></a>
+                    </th:block>
+                </p>
+
+                <a th:if="${userInfos.hasNextPage}"
+                   th:href="@{/admin/member(pageNum=${userInfos.nextPage}, pageSize=${userInfos.pageSize})}" class="next">
+                    <span class="material-symbols-outlined">chevron_right</span>
+                </a>
+            </div>
+
+
+
+
+        <!-- 주소록 보기 버튼 클릭시 모달창 -->
+        <div class="admin__delivery" style="display: none;">
+            <div class="admin__delivery__inner">
+
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="middie">
+                    <button>01</button>
+                    <button>02</button>
+                    <button>03</button>
+                </div>
+
+                <div class="bottom">
+                    <ul>
+                        <li>
+                            <span>배송지명</span>
+                            <span>우리집</span>
+                        </li>
+                        <li>
+                            <span>수령인</span>
+                            <span>홍길동 팀장</span>
+                        </li>
+                        <li>
+                            <span>연락처</span>
+                            <span>010-1234-5678</span>
+                        </li>
+                        <li>
+                            <span>배송주소</span>
+                            <span>12345 서울시 강남구 강남로 123 강남빌딩</span>
+                        </li>
+                    </ul>
+
+
+                    <div class="admin__delivery__buttons">
+                        <button>
+                            <a href="#">닫기</a>
+                        </button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- 탈퇴 버튼 클릭시 모달창 -->
+        <div class="admin__cancel" style="display: none;">
+            <div class="admin__cancel__inner">
+
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="middle">
+                    <p>탈퇴된 회원은 복구할 수 없습니다. <br>
+                        fireraccoon@naver.com을 회원탈퇴 하시겠습니까?</p>
+                </div>
+
+
+                <div class="bottom">
+                    <button>취소하기</button>
+                    <button>탈퇴처리</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 탈퇴처리 버튼 클릭시 탈퇴완료 모달창 -->
+        <div class="admin__cancel__confirm" style="display: none;">
+            <div class="admin__cancel__confirm__inner">
+
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="middle">
+                    <p>회원 탈퇴처리가 완료되었습니다.</p>
+                </div>
+
+
+                <div class="bottom">
+                    <button>확인</button>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- 회원관리 구매수량 버튼 클릭시 모달창 -->
+        <div class="admin__quantity" style="display: none;">
+            <div class="admin__quantity__inner">
+
+                <div class="top">
+                    <span>알림</span>
+                </div>
+
+                <div class="middle01">
+                    <span>[구매상품 목록]</span>
+                    <span>회원ID:
+                        <span>fireraccoon@naver.com</span>
+                    </span>
+                </div>
+
+                <div class="middle02">
+                    <div class="bottom__txt">
+                        <span>상품이미지</span>
+                        <span>상품명/구매금액</span>
+                        <span>구매일</span>
+                    </div>
+
+                    <ul>
+                        <li>
+                            <img src="./img/모달이미지.png" alt="모달이미지">
+                            <div class="li_txt">
+                                <span>프리미엄 고당도.. 외 2개</span>
+                                <span>50,000원</span>
+                            </div>
+                            <span>2023. 03. 12</span>
+                        </li>
+                        <li>
+                            <img src="./img/모달이미지.png" alt="모달이미지">
+                            <div class="li_txt">
+                                <span>프리미엄 고당도.. 외 2개</span>
+                                <span>50,000원</span>
+                            </div>
+                            <span>2023. 03. 12</span>
+                        </li>
+                        <li>
+                            <img src="./img/모달이미지.png" alt="모달이미지">
+                            <div class="li_txt">
+                                <span>프리미엄 고당도.. 외 2개</span>
+                                <span>50,000원</span>
+                            </div>
+                            <span>2023. 03. 12</span>
+                        </li>
+                    </ul>
+
+                    <div class="pagination">
+                        <a href="#" class="prev">
+                            <span class="material-symbols-outlined">
+                                chevron_left
+                            </span>
+                        </a>
+
+                        <p class="numbers">
+                            <a href="#">1</a>
+                            <a href="#">2</a>
+                            <a href="#">3</a>
+                            <a href="#">
+                                <span class="bold">4</span>
+                            </a>
+                            <a href="#">5</a>
+                        </p>
+
+                        <a href="#" class="next">
+                            <span class="material-symbols-outlined">
+                                chevron_right
+                            </span>
+                        </a>
+                    </div>
+
+                    <div class="bottom">
+                        <span>구매금액 합계</span>
+                        <span>150,000원</span>
+                    </div>
+                </div>
+
+
+
+
+                <div class="admin__quantity__buttons">
+                    <button>
+                        <a href="#">닫기</a>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </section>
+</th:block>>
+</html>

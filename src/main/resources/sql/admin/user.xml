@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.fruit.mall_admin.user.UserMapper">
+    <select id="selectUserInfo" resultType="com.fruit.mall_admin.user.dto.UserInfoDto">
+        SELECT
+            u.USER_ID_NO,
+            ROW_NUMBER() OVER (ORDER BY u.USER_ID_NO) AS NUM,
+            u.USER_STATUS,
+            u.USER_NAME,
+            u.USER_EMAIL,
+            COUNT(op.ORDER_ID) AS ORDER_COUNT,
+            u.USER_CREATED_AT
+        FROM user u
+                 LEFT JOIN orders o ON o.USER_ID_NO = u.USER_ID_NO
+                 LEFT JOIN order_product op on o.ORDER_ID = op.ORDER_ID
+                 LEFT JOIN delivery d on u.USER_ID_NO = d.USER_ID_NO
+        GROUP BY u.USER_ID_NO
+    </select>
+    
+    <select id="selectDeliveriesByUserId" resultType="com.fruit.mall_admin.user.dto.UserDelivery">
+        SELECT
+            DELIVERY_NAME,
+            USER_NAME,
+            PHONE_NUMBER,
+            ZIPCODE,
+            ADDRESS
+        FROM delivery
+        WHERE USER_ID_NO = #{userIdNo}
+    </select>
+</mapper>
