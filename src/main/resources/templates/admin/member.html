@@ -94,7 +94,7 @@
                                 <button class="deliveryShowBtn"
                                 th:data-user-id="${user.userIdNo}">보기</button>
                             </td>
-                            <td th:text="${user.userCreatedAt}" class="time">2023. 03. 01</td>
+                            <td th:text="${#dates.format(user.userCreatedAt,'yyyy.MM.dd')}" class="time">2023. 03. 01</td>
                             <td>
                                 <button th:if="${user.userStatus == '활동중'}" class="withdrawBtn" th:data-user-id="${user.userIdNo}">탈퇴</button>
                                 <text th:if="${user.userStatus == '탈퇴'}">-</text>
