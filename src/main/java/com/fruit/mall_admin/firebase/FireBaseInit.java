@@ -12,7 +12,7 @@ import javax.annotation.PostConstruct;
 import java.io.IOException;
 
 @Configuration
-@Slf4j
+@Slf4j(topic = "elk")
 public class FireBaseInit {
     @Value("${firebase.firebaseApiKey}")
     private String firebaseApiKey;

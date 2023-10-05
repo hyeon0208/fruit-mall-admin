@@ -15,7 +15,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 @Service
-@Slf4j
+@Slf4j(topic = "elk")
 public class FireBaseService {
 
     @Value("${firebase.bucket}")

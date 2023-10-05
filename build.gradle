@@ -27,6 +27,8 @@ dependencies {
 	implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 	implementation 'org.springframework.boot:spring-boot-starter-validation'
 	implementation 'org.springframework.boot:spring-boot-starter-aop'
+	implementation 'com.github.danielwegener:logback-kafka-appender:0.1.0'
+	implementation 'net.logstash.logback:logstash-logback-encoder:6.2'
 	implementation 'nz.net.ultraq.thymeleaf:thymeleaf-layout-dialect'
 	implementation 'org.springframework.session:spring-session-jdbc'
 	implementation 'org.springframework.boot:spring-boot-starter-web'

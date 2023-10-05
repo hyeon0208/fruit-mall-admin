@@ -7,7 +7,7 @@ import org.springframework.kafka.core.KafkaTemplate;
 import org.springframework.stereotype.Service;
 
 @Service
-@Slf4j
+@Slf4j(topic = "elk")
 @RequiredArgsConstructor
 public class NotificationsService {
     private final KafkaTemplate<String, NotificationMessage> kafkaTemplate;

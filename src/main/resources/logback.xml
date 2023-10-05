@@ -1,0 +1,31 @@
+<configuration>
+    <appender name="LOG-KAFKA" class="com.github.danielwegener.logback.kafka.KafkaAppender">
+        <encoder class="com.github.danielwegener.logback.kafka.encoding.LayoutKafkaMessageEncoder">
+            <layout class="ch.qos.logback.classic.PatternLayout">
+                <pattern>%date - %-5p %t %-25logger{5} %F:%L %m%n</pattern>
+            </layout>
+        </encoder>
+        <topic>ek-log</topic>
+        <keyingStrategy class="com.github.danielwegener.logback.kafka.keying.RoundRobinKeyingStrategy"/>
+        <deliveryStrategy class="com.github.danielwegener.logback.kafka.delivery.AsynchronousDeliveryStrategy"/>
+        <producerConfig>retries=1</producerConfig>
+        <producerConfig>bootstrap.servers=localhost:9092</producerConfig>
+        <producerConfig>compression.type=snappy</producerConfig>
+        <producerConfig>max.block.ms=1000</producerConfig>
+    </appender>
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%date - %-5p %t %-25logger{5} %F:%L %m%n</pattern>
+        </encoder>
+    </appender>
+
+    <logger name="elk" level="INFO" additivity="false">
+        <appender-ref ref="LOG-KAFKA"/>
+        <appender-ref ref="STDOUT"/>
+    </logger>
+
+    <root level="INFO">
+        <appender-ref ref="STDOUT"/>
+    </root>
+</configuration>

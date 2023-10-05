@@ -174,7 +174,7 @@ $(document).on("click", "#addBtn", (e) => {
 
     axios({
         method: "post",
-        url: "/add/product",
+        url: "/admin/add/product",
         data: formData,
         headers: {'Content-Type': 'multipart/form-data'}
     }).then(res => {
